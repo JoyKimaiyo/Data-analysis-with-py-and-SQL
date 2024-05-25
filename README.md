@@ -1,10 +1,12 @@
-Data Description
+### Data Description
 The dataset encompasses detailed insights into diverse renewable energy systems, encompassing metrics such as installed capacity, energy production, consumption, storage, investment, and environmental impact. Our objective is to furnish a holistic perspective on renewable energy, conducive to research and analysis in the field of sustainable energy.
 
-Data Preprocessing
+
+### Data Preprocessing
 Our initial task entails canin the dataset's numerical codes representing ‘Type_of_Renewable_Energy’ and ‘Funding_Sources’. To accomplish this, we’ll execute SQL commands:
 
-Funding_Sources
+
+##### Funding_Sources
 
 ALTER TABLE dbo.energy_dataset_
 ALTER COLUMN Funding_Sources VARCHAR(50);
@@ -32,14 +34,19 @@ SET Type_of_Renewable_Energy =
  WHEN '7' THEN 'Wave'
  ELSE 'Unknown'
  END;
-We use ALTER TABLE to modify the column types of 'Funding_Sources' and 'Type_of_Renewable_Energy' to VARCHAR(50) to accommodate string values. Then, we utilize UPDATE along with CASE statements to replace numerical codes with descriptive strings for these columns.
+
+ 
+We use ALTER TABLE to modify the column types of 'Funding_Sources' and 'Type_of_Renewable_Energy' to VARCHAR(50) to accommodate string values. 
+Then, we utilize UPDATE along with CASE statements to replace numerical codes with descriptive strings for these columns.
 
 Subsequently, we’ll verify the efficacy of these transformations by checking for ‘Unknown’ entries using the ‘DISTINCT’ keyword: distinct check for unique values in the column.
 
 SELECT DISTINCT Type_of_Renewable_Energy FROM dbo.energy_dataset_;
 SELECT DISTINCT Funding_Sources FROM dbo.energy_dataset_;
 These queries utilize the SELECT DISTINCT statement to fetch unique values of 'Type_of_Renewable_Energy' and 'Funding_Sources'. By examining the distinct values, we can verify if the transformation successfully replaced numerical codes with meaningful strings.
-Exploratory Analysis
+
+
+#### Exploratory Analysis
 Proceeding with exploratory analysis, let’s examine the relationship between ‘Type_of_Renewable_Energy’ and ‘Jobs_Created’:
 
 SELECT
@@ -62,8 +69,10 @@ Tidal 5352948
 Geothermal 5238952
 Wave 5199509
 
+
 This query aggregates the ‘Jobs_Created’ column based on different types of renewable energy sources. It calculates the total jobs created for each type by using SUM along with GROUP BY to group the data based on 'Type_of_Renewable_Energy'. The results are ordered in descending order of total jobs created.
 let’s delve into the count of renewable energy per category:
+
 
 SELECT
  Type_of_Renewable_Energy,
